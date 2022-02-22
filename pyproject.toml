@@ -1,0 +1,13 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "electric_waltz"
+authors = [{name = "Mat\u011bj Grabovsk\u00fd", email = "matej@mgrabovsky.net"}]
+dynamic = ["version", "description"]
+description-file = "README.md"
+requires-python = ">=3.8"
+
+[project.urls]
+Home = "https://github.com/mgrabovsky/electric-waltz"
