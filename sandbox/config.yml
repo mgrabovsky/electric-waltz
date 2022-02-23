@@ -1,0 +1,51 @@
+plants:
+  # Installed capacity of various types of power plants in MW.
+  installed:
+    nuclear:   2293
+    pv:      23_058 # Photovoltaic solar
+    wind:      8777
+    hydro:     1081 # Run-of-the-river hydro
+    biomass:   3980
+    gas:       3648 # Natural gas
+  # Technological self-consumption of power plant types.
+  self_consumption:
+    nuclear: .05_50
+    pv:      .00_89
+    wind:    .01_29
+    hydro:   .00_80
+    biomass: .09_26
+    gas:     .03
+
+storage:
+  # Nominal installed capacity in MW.
+  installed:
+    pumped:  1950 # Water pumped storage
+    battery: 2000
+    p2g:     2000 # Power-to-gas
+  # Maximum energy storage capacity in MWh.
+  max_energy:
+    pumped:    9750
+    battery:   2652
+    p2g:     10_000
+  efficiency:
+    pumped:  .76_76
+    battery: .85
+    p2g:     .5
+  # Amount of energy stored at the start of the year in MWh.
+  starting_energy:
+    pumped:  0
+    battery: 0
+    p2g:     0
+
+# Cross-border electricity transmission -- export/import capacity in MW.
+cross_border:
+  max_export: 2000
+  max_import: 2000
+
+consumption:
+  # Total annual net consumption in MWh.
+  total_net: 91_923_143
+  # Losses in the transmission system compared to net consumption.
+  transmission_loss: .02
+  # Losses in the distribution system compared to net consumption.
+  distribution_loss: .05_03
