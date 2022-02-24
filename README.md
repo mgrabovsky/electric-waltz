@@ -1,6 +1,6 @@
 # Electric Waltz
 
-> A simple model of the eletric transmission system of the Czech Republic.
+> A simple model of the electric transmission system of the Czech Republic.
 
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
