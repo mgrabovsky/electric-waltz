@@ -1,57 +1,89 @@
 """
-Objects and functions for electricity storage.
+Objects for representing electricity storage units and aggregates within
+the grid.
 """
 
+from .types import Energy, Power
 
-class StorageAggregate:
+__all__ = [
+    "EnergyStorage",
+]
+
+
+class EnergyStorage:
     """
     An object representing the aggregate storage capaciticies of a single
     kind of storage.
     """
 
     def __init__(
-        self, capacity: float, max_energy: float, efficiency: float = 1.0
+        self,
+        nominal: Power,
+        max_storage: Energy,
+        efficiency: float = 1.0,
     ) -> None:
         """
         Arguments:
-          capacity -- nominal installed capacity in MW
-          max_energy -- maximum stored energy in MWh
-          efficiency -- efficiency of round-trip conversion, a number in the
-            interval (0.0,1.0]
+            capacity : Nominal (installed) capacity of the storage unit in MW.
+            max_storage : Maximum stored energy in MWh.
+            efficiency : Efficiency of conversion during charging, a number in the
+                interval (0.0,1.0]. In the current implementation, this is the same
+                as the round-trip efficiency.
         """
-        assert 0 < capacity
-        assert 0 < max_energy
+        assert 0 < nominal
+        assert 0 < max_storage
         assert 0 < efficiency <= 1
 
-        self._capacity = capacity
-        self._max_energy = max_energy
+        self._nominal_capacity = nominal
+        self._max_storage = max_storage
         self._efficiency = efficiency
 
-        self._energy: float = 0.0
+        self._current_energy: Energy = 0.0
+
+    def charge_at(self, power: Power) -> Power:
+        """
+        Try charging the storage unit with up to `power` MW.
+
+        Arguments:
+            power : Power that is available for charging in MW.
+
+        Returns:
+            Effective charging power in MW.
+        """
+        assert power >= 0
+
+        # Effective charging power is limited by the lest of nominal capacity and the
+        # remaining storage capacity. Note that we may treat MW = MWh as we assume
+        # hourly steps.
+        charging = min(power, self._nominal_capacity, self.remaining_capacity)
+        self._current_energy += self._efficiency * charging
+
+        assert self._current_energy <= self._max_storage
+        return charging
+
+    def discharge_at(self, power: Power) -> Power:
+        """
+        Try discharging the storage unit up to `required` MW.
+
+        Arguments:
+            power : Power that is requested to be discharged in MW.
+
+        Returns:
+            Effective discharging power in MW.
+        """
+        assert power >= 0
+
+        # If required energy is more than we have stored, discharge as much
+        # as we can, subject to nominal power and accumulated capacity.
+        # If required power is bigger than what we can provide instantaneously,
+        # discharge at nominal only.
+        discharging = min(power, self._current_energy, self._nominal_capacity)
+        self._current_energy -= discharging
+
+        assert self._current_energy >= 0
+        return discharging
 
     @property
-    def fully_charged(self) -> bool:
-        """Return True if the storage is charged to 100% of its capacity."""
-        return self._energy == self._max_energy
-
-    @property
-    def remaining_capacity(self) -> float:
+    def remaining_capacity(self) -> Energy:
         """Return the amount of remaining energy storage capacity in MWh."""
-        return self._max_energy - self._energy
-
-    def try_charge(self, energy: float) -> float:
-        """Return True if the storage is charged to 100% of its capacity."""
-        # TODO: Also check self.capacity?
-        if self.fully_charged:
-            # We can take no more.
-            return energy
-
-        if energy > self.remaining_capacity:
-            # Take what we can and return the rest.
-            overflow = energy - self.remaining_capacity
-            self._energy = self._max_energy
-            return overflow
-
-        assert energy <= self.remaining_capacity
-        self._energy += energy
-        return 0
+        return self._max_storage - self._current_energy
