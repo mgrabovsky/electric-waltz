@@ -6,12 +6,15 @@ on:
     branches: [main]
 jobs:
   build:
+    name: ${{ matrix.name }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version:
-          - '3.9'
-          - '3.10'
+        include:
+          - { python: '3.9',  tox: py39,   name: '3.9' }
+          - { python: '3.10', tox: py310,  name: '3.10' }
+          - { python: '3.10', tox: style,  name: 'Code style' }
+          - { python: '3.10', tox: typing, name: 'Typing' }
     env:
       PYTHON_VERSION_COVERAGE: '3.10'
     steps:
@@ -21,19 +24,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python }}
 
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install black coverage flake8 flit mccabe mypy pylint pytest tox tox-gh-actions
+        run: pip install --upgrade pip tox
 
       - name: Run tox
-        run: tox -v
+        run: tox -v -e ${{ matrix.tox }}
 
       - name: Upload coverage report
         uses: codecov/codecov-action@v2
-        if: contains(env.PYTHON_VERSION_COVERAGE, matrix.python-version)
+        if: contains(env.PYTHON_VERSION_COVERAGE, matrix.name)
         with:
           fail_ci_if_error: true
           flags: unittests
