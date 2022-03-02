@@ -1,6 +1,27 @@
+[MASTER]
+# Parallelize automatically over available CPUs.
+jobs=0
+
+# Do not store data for later comparisons.
+persistent=no
+
 [MESSAGES CONTROL]
-disable=fixme,
+disable=design,
+        fixme,
         missing-class-docstring,
         missing-function-docstring,
         missing-module-docstring,
         similarities,
+
+[REPORTS]
+reports=no
+score=no
+
+[VARIABLES]
+# Do not check for unused imports in __init__ files.
+init-import=no
+# A regular expression matching the beginning of the name of dummy/unused variables.
+dummy-variables-rgx=_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)
+
+[STRING]
+check-quote-consistency=yes
