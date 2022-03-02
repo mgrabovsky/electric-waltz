@@ -31,11 +31,6 @@ storage:
     pumped:  .76_76
     battery: .85
     p2g:     .5
-  # Amount of energy stored at the start of the year in MWh.
-  starting_energy:
-    pumped:  0
-    battery: 0
-    p2g:     0
 
 # Cross-border electricity transmission -- export/import capacity in MW.
 cross_border:
@@ -43,8 +38,6 @@ cross_border:
   max_import: 2000
 
 consumption:
-  # Total annual net consumption in MWh.
-  total_net: 91_923_143
   # Losses in the transmission system compared to net consumption.
   transmission_loss: .02
   # Losses in the distribution system compared to net consumption.

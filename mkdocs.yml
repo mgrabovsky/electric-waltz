@@ -1,0 +1,8 @@
+site_name: Electric Waltz
+theme:
+  name: material
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          rendering: { show_source: false }
