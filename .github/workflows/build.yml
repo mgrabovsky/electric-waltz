@@ -32,10 +32,16 @@ jobs:
       - name: Run tox
         run: tox -v -e ${{ matrix.tox }}
 
-      - name: Upload coverage report
+      - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v2
         if: contains(env.PYTHON_VERSION_COVERAGE, matrix.name)
         with:
           fail_ci_if_error: true
           flags: unittests
           verbose: true
+
+      - name: Upload coverage report to CodeClimate
+        uses: paambaati/codeclimate-action@v3.0.0
+        if: contains(env.PYTHON_VERSION_COVERAGE, matrix.name)
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
