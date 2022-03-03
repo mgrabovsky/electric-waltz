@@ -44,6 +44,7 @@ class EnergyStorage:
         self._efficiency = efficiency
 
         self._current_energy: Energy = 0.0
+        self._current_output: Power = 0.0
 
     def charge_at(self, power: Power) -> Power:
         """
@@ -62,6 +63,7 @@ class EnergyStorage:
         # hourly steps.
         charging = min(power, self._nominal_capacity, self.remaining_capacity)
         self._current_energy += self._efficiency * charging
+        self._current_output = -charging
 
         assert self._current_energy <= self._max_storage
         return charging
@@ -84,6 +86,7 @@ class EnergyStorage:
         # discharge at nominal only.
         discharging = min(power, self._current_energy, self._nominal_capacity)
         self._current_energy -= discharging
+        self._current_output = discharging
 
         assert self._current_energy >= 0
         return discharging
@@ -92,6 +95,14 @@ class EnergyStorage:
     def name(self) -> str:
         """Return the storage aggregate's textual identifier."""
         return self._name
+
+    @property
+    def output(self) -> Power:
+        """
+        Return the current power output in MW. Negative if charging, positive if
+        discharging.
+        """
+        return self._current_output
 
     @property
     def remaining_capacity(self) -> Energy:
