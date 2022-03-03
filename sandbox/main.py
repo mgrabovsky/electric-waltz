@@ -11,18 +11,8 @@ from electric_waltz.source import (
     PowerSource,
 )
 from electric_waltz.storage import EnergyStorage
+from electric_waltz.tracing import StatsCollector
 from electric_waltz.types import Energy, Power
-
-
-class Statistics:
-    total_flexible_generation: Energy = 0.0
-    total_inflexible_generation: Energy = 0.0
-    total_charging: Energy = 0.0
-    total_discharging: Energy = 0.0
-    total_export: Energy = 0.0
-    total_import: Energy = 0.0
-    total_dump: Energy = 0.0
-    total_shortage: Energy = 0.0
 
 
 @dataclass
@@ -65,11 +55,8 @@ def make_storage(kind: str, config) -> EnergyStorage:
     )
 
 
-def run(config, states: list[World]) -> Statistics:
-    # Set up.
-    # ----------------------------------------------------------------
-    # Collected statistics.
-    stats = Statistics()
+def run(config, states: list[World]) -> StatsCollectors:
+    stats = StatsCollector()
 
     # Inflexible power plants.
     nuclear = make_power_plant("nuclear", config)

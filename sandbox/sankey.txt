@@ -1,0 +1,99 @@
+// 1. Overall overview
+// Dimensions: 800×400
+
+// Supply side
+Nuclear [100] Inflexible sources
+Photovoltaic [60] Inflexible sources
+On-shore wind [40] Inflexible sources
+
+Hydro [20] Flexible sources
+Biomass [30] Flexible sources
+Natural gas [50] Flexible sources
+Lignite [50] Flexible sources
+
+Inflexible sources [200] Net generation
+Flexible sources [150] Net generation
+
+Pumped water [40] Storage discharging
+Battery [30] Storage discharging
+Power-to-gas [30] Storage discharging
+
+Net generation [350] Total balance
+Storage discharging [100] Total balance
+Cross-border import [20] Total balance
+
+// Demand side
+Total balance [320] Total consumption
+Total balance [110] Storage charging
+Total balance [40] Cross-border export
+
+Total consumption [310] Demand
+Total consumption [10] Losses
+
+Storage charging [50] Pumped water'
+Storage charging [30] Battery'
+Storage charging [30] Power-to-gas'
+
+// TODO: + shortage / dump
+
+// ----------------------------------------
+
+// 2. When inflexible generation >= consumption
+// Dimensions: 800×400
+
+// Supply side
+Nuclear [200] Inflexible sources
+Photovoltaic [110] Inflexible sources
+On-shore wind [90] Inflexible sources
+
+Inflexible sources [400] Net generation
+
+Net generation [400] Total balance
+
+// Demand side
+Total balance [300] Total consumption
+Total balance [80] Storage charging
+Total balance [20] Cross-border export
+
+Total consumption [290] Demand
+Total consumption [10] Losses
+
+Storage charging [50] Pumped water'
+Storage charging [20] Battery'
+Storage charging [10] Power-to-gas'
+
+// TODO: + dump
+
+// ----------------------------------------
+
+// 3. When inflexible generation < consumption
+// Dimensions: 800×400
+
+// Supply side
+Nuclear [100] Inflexible sources
+Photovoltaic [60] Inflexible sources
+On-shore wind [40] Inflexible sources
+
+Hydro [20] Flexible sources
+Biomass [30] Flexible sources
+Natural gas [50] Flexible sources
+Lignite [50] Flexible sources
+
+Inflexible sources [200] Net generation
+Flexible sources [150] Net generation
+
+Pumped water [40] Storage discharging
+Battery [30] Storage discharging
+Power-to-gas [30] Storage discharging
+
+Net generation [350] Total balance
+Storage discharging [100] Total balance
+Cross-border import [20] Total balance
+
+// Demand side
+Total balance [470] Total consumption
+
+Total consumption [440] Demand
+Total consumption [30] Losses
+
+// TODO: + shortage

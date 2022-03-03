@@ -1,0 +1,124 @@
+<svg id="sankey_svg" height="400" width="800" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<title>Your Diagram Title</title>
+<!-- Generated with SankeyMATIC: 01/03/2022, 14:50:45 -->
+<rect height="400" width="800" fill="#ffffff"></rect>
+<g transform="translate(12,18)">
+<g id="sankey_flows">
+<path class="link" d="M468.8 175.94254C541.6 175.94254 541.6 176.33832 614.4 176.33832" style="stroke: rgb(188, 189, 220); opacity: 0.4; fill: none; stroke-width: 210.978px;"><title>Total balance &#8594; Total consumption:
+470</title></path>
+<path class="link" d="M622.4 169.60498C695.2 169.60498 695.2 169.56348 768 169.56348" style="stroke: rgb(99, 99, 99); opacity: 0.4; fill: none; stroke-width: 197.511px;"><title>Total consumption &#8594; Demand:
+440</title></path>
+<path class="link" d="M315.2 134.85869C388 134.85869 388 149.00921 460.8 149.00921" style="stroke: rgb(188, 189, 220); opacity: 0.4; fill: none; stroke-width: 157.111px;"><title>Net generation &#8594; Total balance:
+350</title></path>
+<path class="link" d="M161.6 72.34372C234.4 72.34372 234.4 101.19202 307.2 101.19202" style="stroke: rgb(116, 196, 118); opacity: 0.4; fill: none; stroke-width: 89.7778px;"><title>Inflexible sources &#8594; Net generation:
+200</title></path>
+<path class="link" d="M161.6 204.70654C234.4 204.70654 234.4 179.74757 307.2 179.74757" style="stroke: rgb(116, 196, 118); opacity: 0.4; fill: none; stroke-width: 67.3333px;"><title>Flexible sources &#8594; Net generation:
+150</title></path>
+<path class="link" d="M8 22.44444C80.8 22.44444 80.8 49.89928 153.6 49.89928" style="stroke: rgb(107, 174, 214); opacity: 0.4; fill: none; stroke-width: 44.8889px;"><title>Nuclear &#8594; Inflexible sources:
+100</title></path>
+<path class="link" d="M161.6 304.1812C311.2 304.1812 311.2 258.98699 460.8 258.98699" style="stroke: rgb(188, 189, 220); opacity: 0.4; fill: none; stroke-width: 44.8889px;"><title>Storage discharging &#8594; Total balance:
+100</title></path>
+<path class="link" d="M8 76.35556C80.8 76.35556 80.8 85.81039 153.6 85.81039" style="stroke: rgb(107, 174, 214); opacity: 0.4; fill: none; stroke-width: 26.9333px;"><title>Photovoltaic &#8594; Inflexible sources:
+60</title></path>
+<path class="link" d="M8 213.44444C80.8 213.44444 80.8 204.70654 153.6 204.70654" style="stroke: rgb(253, 141, 60); opacity: 0.4; fill: none; stroke-width: 22.4444px;"><title>Natural gas &#8594; Flexible sources:
+50</title></path>
+<path class="link" d="M8 253.88889C80.8 253.88889 80.8 227.15099 153.6 227.15099" style="stroke: rgb(253, 141, 60); opacity: 0.4; fill: none; stroke-width: 22.4444px;"><title>Lignite &#8594; Flexible sources:
+50</title></path>
+<path class="link" d="M8 116.8C80.8 116.8 80.8 108.25483 153.6 108.25483" style="stroke: rgb(107, 174, 214); opacity: 0.4; fill: none; stroke-width: 17.9556px;"><title>On-shore wind &#8594; Inflexible sources:
+40</title></path>
+<path class="link" d="M8 292.08889C80.8 292.08889 80.8 290.71453 153.6 290.71453" style="stroke: rgb(199, 233, 192); opacity: 0.4; fill: none; stroke-width: 17.9556px;"><title>Pumped water &#8594; Storage discharging:
+40</title></path>
+<path class="link" d="M8 177.48889C80.8 177.48889 80.8 186.75099 153.6 186.75099" style="stroke: rgb(253, 141, 60); opacity: 0.4; fill: none; stroke-width: 13.4667px;"><title>Biomass &#8594; Flexible sources:
+30</title></path>
+<path class="link" d="M8 325.8C80.8 325.8 80.8 306.42564 153.6 306.42564" style="stroke: rgb(199, 233, 192); opacity: 0.4; fill: none; stroke-width: 13.4667px;"><title>Battery &#8594; Storage discharging:
+30</title></path>
+<path class="link" d="M8 357.26667C80.8 357.26667 80.8 319.89231 153.6 319.89231" style="stroke: rgb(199, 233, 192); opacity: 0.4; fill: none; stroke-width: 13.4667px;"><title>Power-to-gas &#8594; Storage discharging:
+30</title></path>
+<path class="link" d="M622.4 275.09387C695.2 275.09387 695.2 293.05237 768 293.05237" style="stroke: rgb(150, 150, 150); opacity: 0.4; fill: none; stroke-width: 13.4667px;"><title>Total consumption &#8594; Losses:
+30</title></path>
+<path class="link" d="M8 148.26667C80.8 148.26667 80.8 175.52876 153.6 175.52876" style="stroke: rgb(253, 141, 60); opacity: 0.4; fill: none; stroke-width: 8.97778px;"><title>Hydro &#8594; Flexible sources:
+20</title></path>
+<path class="link" d="M315.2 244.76858C388 244.76858 388 232.05366 460.8 232.05366" style="stroke: rgb(188, 189, 220); opacity: 0.4; fill: none; stroke-width: 8.97778px;"><title>Cross-border import &#8594; Total balance:
+20</title></path>
+</g>
+<g id="sankey_nodes" shape-rendering="crispEdges" style="stroke-width: 0px;">
+<g class="node"><rect x="0" y="0" height="44.88889" width="8" id="r0" class="for_r0" style="fill: rgb(49, 130, 189); fill-opacity: 1; stroke: rgb(24, 63, 92);"><title>Nuclear:
+100</title></rect>
+</g>
+<g class="node"><rect x="153.6" y="27.45483" height="89.77778" width="8" id="r1" class="for_r1" style="fill: rgb(107, 174, 214); fill-opacity: 1; stroke: rgb(52, 85, 104);"><title>Inflexible sources:
+200</title></rect>
+</g>
+<g class="node"><rect x="0" y="62.88889" height="26.93333" width="8" id="r2" class="for_r2" style="fill: rgb(158, 202, 225); fill-opacity: 1; stroke: rgb(77, 98, 110);"><title>Photovoltaic:
+60</title></rect>
+</g>
+<g class="node"><rect x="0" y="107.82222" height="17.95556" width="8" id="r3" class="for_r3" style="fill: rgb(198, 219, 239); fill-opacity: 1; stroke: rgb(97, 107, 117);"><title>On-shore wind:
+40</title></rect>
+</g>
+<g class="node"><rect x="0" y="143.77778" height="8.97778" width="8" id="r4" class="for_r4" style="fill: rgb(230, 85, 13); fill-opacity: 1; stroke: rgb(112, 41, 6);"><title>Hydro:
+20</title></rect>
+</g>
+<g class="node"><rect x="153.6" y="171.03988" height="67.33333" width="8" id="r5" class="for_r5" style="fill: rgb(253, 141, 60); fill-opacity: 1; stroke: rgb(123, 69, 29);"><title>Flexible sources:
+150</title></rect>
+</g>
+<g class="node"><rect x="0" y="170.75556" height="13.46667" width="8" id="r6" class="for_r6" style="fill: rgb(253, 174, 107); fill-opacity: 1; stroke: rgb(123, 85, 52);"><title>Biomass:
+30</title></rect>
+</g>
+<g class="node"><rect x="0" y="202.22222" height="22.44444" width="8" id="r7" class="for_r7" style="fill: rgb(253, 208, 162); fill-opacity: 1; stroke: rgb(123, 101, 79);"><title>Natural gas:
+50</title></rect>
+</g>
+<g class="node"><rect x="0" y="242.66667" height="22.44444" width="8" id="r8" class="for_r8" style="fill: rgb(49, 163, 84); fill-opacity: 1; stroke: rgb(24, 79, 41);"><title>Lignite:
+50</title></rect>
+</g>
+<g class="node"><rect x="307.2" y="56.30313" height="157.11111" width="8" id="r9" class="for_r9" style="fill: rgb(116, 196, 118); fill-opacity: 1; stroke: rgb(56, 96, 57);"><title>Net generation:
+350</title></rect>
+</g>
+<g class="node"><rect x="0" y="283.11111" height="17.95556" width="8" id="r10" class="for_r10" style="fill: rgb(161, 217, 155); fill-opacity: 1; stroke: rgb(78, 106, 75);"><title>Pumped water:
+40</title></rect>
+</g>
+<g class="node"><rect x="153.6" y="281.73675" height="44.88889" width="8" id="r11" class="for_r11" style="fill: rgb(199, 233, 192); fill-opacity: 1; stroke: rgb(97, 114, 94);"><title>Storage discharging:
+100</title></rect>
+</g>
+<g class="node"><rect x="0" y="319.06667" height="13.46667" width="8" id="r12" class="for_r12" style="fill: rgb(117, 107, 177); fill-opacity: 1; stroke: rgb(57, 52, 86);"><title>Battery:
+30</title></rect>
+</g>
+<g class="node"><rect x="0" y="350.53333" height="13.46667" width="8" id="r13" class="for_r13" style="fill: rgb(158, 154, 200); fill-opacity: 1; stroke: rgb(77, 75, 97);"><title>Power-to-gas:
+30</title></rect>
+</g>
+<g class="node"><rect x="460.8" y="70.45366" height="210.97778" width="8" id="r14" class="for_r14" style="fill: rgb(188, 189, 220); fill-opacity: 1; stroke: rgb(92, 92, 107);"><title>Total balance:
+470</title></rect>
+</g>
+<g class="node"><rect x="307.2" y="240.27969" height="8.97778" width="8" id="r15" class="for_r15" style="fill: rgb(218, 218, 235); fill-opacity: 1; stroke: rgb(106, 106, 115);"><title>Cross-border import:
+20</title></rect>
+</g>
+<g class="node"><rect x="614.4" y="70.84943" height="210.97778" width="8" id="r16" class="for_r16" style="fill: rgb(188, 189, 220); fill-opacity: 1; stroke: rgb(92, 92, 107);"><title>Total consumption:
+470</title></rect>
+</g>
+<g class="node"><rect x="768" y="70.80792" height="197.51111" width="8" id="r17" class="for_r17" style="fill: rgb(99, 99, 99); fill-opacity: 1; stroke: rgb(48, 48, 48);"><title>Demand:
+440</title></rect>
+</g>
+<g class="node"><rect x="768" y="286.31903" height="13.46667" width="8" id="r18" class="for_r18" style="fill: rgb(150, 150, 150); fill-opacity: 1; stroke: rgb(73, 73, 73);"><title>Losses:
+30</title></rect>
+</g>
+</g>
+<g id="sankey_labels" style="font-family: sans-serif; font-size: 15px; font-weight: 400; fill: rgb(0, 0, 0);">
+<text text-anchor="start" x="14" y="22.44444" dy=".35em" class="for_r0">Nuclear</text>
+<text text-anchor="start" x="167.6" y="72.34372" dy=".35em" class="for_r1">Inflexible sources</text>
+<text text-anchor="start" x="14" y="76.35556" dy=".35em" class="for_r2">Photovoltaic</text>
+<text text-anchor="start" x="14" y="116.8" dy=".35em" class="for_r3">On-shore wind</text>
+<text text-anchor="start" x="14" y="148.26667" dy=".35em" class="for_r4">Hydro</text>
+<text text-anchor="start" x="167.6" y="204.70654" dy=".35em" class="for_r5">Flexible sources</text>
+<text text-anchor="start" x="14" y="177.48889" dy=".35em" class="for_r6">Biomass</text>
+<text text-anchor="start" x="14" y="213.44444" dy=".35em" class="for_r7">Natural gas</text>
+<text text-anchor="start" x="14" y="253.88889" dy=".35em" class="for_r8">Lignite</text>
+<text text-anchor="start" x="321.2" y="134.85869" dy=".35em" class="for_r9">Net generation</text>
+<text text-anchor="start" x="14" y="292.08889" dy=".35em" class="for_r10">Pumped water</text>
+<text text-anchor="start" x="167.6" y="304.1812" dy=".35em" class="for_r11">Storage discharging</text>
+<text text-anchor="start" x="14" y="325.8" dy=".35em" class="for_r12">Battery</text>
+<text text-anchor="start" x="14" y="357.26667" dy=".35em" class="for_r13">Power-to-gas</text>
+<text text-anchor="end" x="454.8" y="175.94254" dy=".35em" class="for_r14">Total balance</text>
+<text text-anchor="start" x="321.2" y="244.76858" dy=".35em" class="for_r15">Cross-border import</text>
+<text text-anchor="end" x="608.4" y="176.33832" dy=".35em" class="for_r16">Total consumption</text>
+<text text-anchor="end" x="762" y="169.56348" dy=".35em" class="for_r17">Demand</text>
+<text text-anchor="end" x="762" y="293.05237" dy=".35em" class="for_r18">Losses</text>
+</g>
+</g></svg>
