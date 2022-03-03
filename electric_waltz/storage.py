@@ -18,22 +18,27 @@ class EnergyStorage:
 
     def __init__(
         self,
+        name: str,
         nominal: Power,
         max_storage: Energy,
         efficiency: float = 1.0,
     ) -> None:
         """
         Arguments:
+            name : Short textual identifier of the storage aggregate, e.g. "p2g"
+                or "pumped".
             capacity : Nominal (installed) capacity of the storage unit in MW.
             max_storage : Maximum stored energy in MWh.
             efficiency : Efficiency of conversion during charging, a number in the
                 interval (0.0,1.0]. In the current implementation, this is the same
                 as the round-trip efficiency.
         """
+        assert 0 < len(name)
         assert 0 < nominal
         assert 0 < max_storage
         assert 0 < efficiency <= 1
 
+        self._name = name
         self._nominal_capacity = nominal
         self._max_storage = max_storage
         self._efficiency = efficiency
@@ -82,6 +87,11 @@ class EnergyStorage:
 
         assert self._current_energy >= 0
         return discharging
+
+    @property
+    def name(self) -> str:
+        """Return the storage aggregate's textual identifier."""
+        return self._name
 
     @property
     def remaining_capacity(self) -> Energy:

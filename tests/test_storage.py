@@ -5,11 +5,12 @@ from electric_waltz.storage import EnergyStorage
 
 class StorageAggregateTestCase(TestCase):
     def test_remaining_capacity_initial(self):
-        battery = EnergyStorage(nominal=1200, max_storage=6000)
+        battery = EnergyStorage(name="battery", nominal=1200, max_storage=6000)
         self.assertEqual(battery.remaining_capacity, 6000)
+        self.assertEqual(battery.name, "battery")
 
     def test_charge_zero(self):
-        battery = EnergyStorage(nominal=500, max_storage=2000)
+        battery = EnergyStorage(name="battery", nominal=500, max_storage=2000)
         self.assertEqual(battery.remaining_capacity, 2000)
 
         charging_power = battery.charge_at(0)
@@ -17,7 +18,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(charging_power, 0)
 
     def test_charge_from_empty(self):
-        battery = EnergyStorage(nominal=1200, max_storage=6000)
+        battery = EnergyStorage(name="battery", nominal=1200, max_storage=6000)
         self.assertEqual(battery.remaining_capacity, 6000)
 
         charging_power = battery.charge_at(500)
@@ -29,7 +30,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(charging_power, 1000)
 
     def test_charge_when_full(self):
-        battery = EnergyStorage(nominal=500, max_storage=500)
+        battery = EnergyStorage(name="battery", nominal=500, max_storage=500)
         self.assertEqual(battery.remaining_capacity, 500)
 
         charging_power = battery.charge_at(500)
@@ -41,7 +42,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(charging_power, 0)
 
     def test_charge_over_capacity(self):
-        battery = EnergyStorage(nominal=500, max_storage=2000)
+        battery = EnergyStorage(name="battery", nominal=500, max_storage=2000)
         self.assertEqual(battery.remaining_capacity, 2000)
 
         charging_power = battery.charge_at(1000)
@@ -53,7 +54,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(charging_power, 500)
 
     def test_discharge_empty(self):
-        battery = EnergyStorage(nominal=500, max_storage=500)
+        battery = EnergyStorage(name="battery", nominal=500, max_storage=500)
         self.assertEqual(battery.remaining_capacity, 500)
 
         discharging_power = battery.discharge_at(100)
@@ -61,7 +62,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(discharging_power, 0)
 
     def test_discharge_full(self):
-        battery = EnergyStorage(nominal=500, max_storage=500)
+        battery = EnergyStorage(name="battery", nominal=500, max_storage=500)
         self.assertEqual(battery.remaining_capacity, 500)
 
         charging_power = battery.charge_at(500)
@@ -73,7 +74,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(discharging_power, 500)
 
     def test_discharge_over_capacity(self):
-        battery = EnergyStorage(nominal=500, max_storage=1000)
+        battery = EnergyStorage(name="battery", nominal=500, max_storage=1000)
         self.assertEqual(battery.remaining_capacity, 1000)
 
         charging_power = battery.charge_at(500)
@@ -89,7 +90,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(discharging_power, 500)
 
     def test_discharge_over_storage(self):
-        battery = EnergyStorage(nominal=500, max_storage=500)
+        battery = EnergyStorage(name="battery", nominal=500, max_storage=500)
         self.assertEqual(battery.remaining_capacity, 500)
 
         charging_power = battery.charge_at(500)
@@ -105,7 +106,7 @@ class StorageAggregateTestCase(TestCase):
         self.assertEqual(discharging_power, 200)
 
     def test_imperfect_charge_from_empty(self):
-        battery = EnergyStorage(nominal=1000, max_storage=6000, efficiency=0.9)
+        battery = EnergyStorage(name="battery", nominal=1000, max_storage=6000, efficiency=0.9)
         self.assertEqual(battery.remaining_capacity, 6000)
 
         charging_power = battery.charge_at(1000)

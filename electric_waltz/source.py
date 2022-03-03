@@ -18,12 +18,17 @@ class PowerSource:
     """
 
     def __init__(
-        self, nominal: Power, self_consumption: float = 0.0, utilisation: float = 1.0
+        self,
+        name: str,
+        nominal: Power,
+        self_consumption: float = 0.0,
+        utilisation: float = 1.0,
     ) -> None:
         """
         Create an electricity source object.
 
         Arguments:
+            name : Short textual identifier of the source, e.g. "wind" or "nuclear".
             capacity : Nominal (or nameplate, installed) capacity of the
                 source in MW.
             self_consumption : Portion of generated power that is
@@ -32,10 +37,12 @@ class PowerSource:
             utilisation : Initial utilisation (or capacity factor) of
                 the source. A number in the range [0, 1].
         """
+        assert 0 < len(name)
         assert 0 < nominal
         assert 0 <= self_consumption < 1
         assert 0 <= utilisation <= 1
 
+        self._name = name
         self._nominal_capacity = nominal
         self._self_consumption = self_consumption
         self._utilisation = utilisation
@@ -47,6 +54,11 @@ class PowerSource:
         to the nominal capacity multiplied by the capacity factor.
         """
         return self._utilisation * self._nominal_capacity
+
+    @property
+    def name(self) -> str:
+        """Return the source's textual identifier."""
+        return self._name
 
     @property
     def net_generation(self) -> Power:
