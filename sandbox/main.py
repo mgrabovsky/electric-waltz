@@ -216,3 +216,39 @@ if __name__ == "__main__":
     print(f"Total shortage:              {total_shortage:12,.0f} MWh")
 
     print(f"\nTotal consumption:           {total_consumption:12,.0f} MWh")
+
+    with open("sandbox/model_output.csv", "w", encoding="utf-8") as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(
+            [
+                "nuclear",
+                "pv",
+                "wind",
+                "biomass",
+                "hydro",
+                "gas",
+                "pumped",
+                "battery",
+                "p2g",
+                "import",
+                "shortage",
+            ]
+        )
+        for i in range(len(stats.net_import)):
+            writer.writerow(
+                [
+                    stats.source_generation["nuclear"][i],
+                    stats.source_generation["pv"][i],
+                    stats.source_generation["wind"][i],
+                    stats.source_generation["biomass"][i],
+                    stats.source_generation["hydro"][i],
+                    stats.source_generation["gas"][i],
+                    stats.storage_output["pumped"][i],
+                    stats.storage_output["battery"][i],
+                    stats.storage_output["p2g"][i],
+                    stats.net_import[i],
+                    stats.shortage[i],
+                ]
+            )
+
+    print("\nModel output written to ‘sandbox/model_output.csv’")
