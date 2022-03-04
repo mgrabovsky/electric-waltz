@@ -18,5 +18,5 @@ This project is licensed under the [Blue Oak Model License 1.0.0](https://blueoa
 [build-url]: https://github.com/mgrabovsky/electric-waltz/actions/workflows/build.yml
 [coverage-image]: https://codecov.io/gh/mgrabovsky/electric-waltz/branch/main/graph/badge.svg
 [coverage-url]: https://codecov.io/gh/mgrabovsky/electric-waltz
-[quality-image]: https://api.codeclimate.com/v1/badges/3130fa0ba3b7993fbf0a/maintainability
+[quality-image]: https://api.codeclimate.com/v1/badges/5fa295edef142fc90ddd/maintainability
 [quality-url]: https://codeclimate.com/github/mgrabovsky/electric-waltz
