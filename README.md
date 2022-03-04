@@ -8,6 +8,10 @@
 
 Electric Waltz is an extremely simplified model of the Czech electric transmission system.
 
+## History
+
+A first version of this model was devised by Jan Rovenský and implemented in an Excel spreadsheet. This project is a rewrite of that model in Python which provides greater flexibility and maintainability. It makes the model easier to expand and customise.
+
 ## Licence
 
 This project is licensed under the [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
