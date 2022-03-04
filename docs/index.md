@@ -10,6 +10,7 @@ The basic features of the model currently include:
     -   The default merit order is as follows: baseload and intermittent sources (nuclear, PV, wind) → storage → hydro → biomass → natural gas → cross-border import.
 -   Redirecting of surplus generation to storage units (pumped water, batteries, power-to-gas) and discharging them when demand rises.
 -   Basic modelling of power plant self-consumption, storage inefficiency (only at charging time at the moment) and transmission/distribution losses in the grid.
+-   Configuration of grid elements and properties using a YAML file.
 -   Export of hourly data to CSV.
 
 ## Example output
