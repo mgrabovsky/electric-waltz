@@ -2,6 +2,16 @@
 
 This project aims to construct an open-source model of the Czech electricity grid.
 
+The basic features of the model currently include:
+
+-   Calculating the generation adequacy for each hour of the year.
+-   Calculating the generation of intermittent sources (photoltaic, wind) according to their assumed hourly capacity factor (supplied as part of input).
+-   Dispatching flexible sources, storage and import/export in a specified merit order.
+    -   The default merit order is as follows: baseload and intermittent sources (nuclear, PV, wind) → storage → hydro → biomass → natural gas → cross-border import.
+-   Redirecting of surplus generation to storage units (pumped water, batteries, power-to-gas) and discharging them when demand rises.
+-   Basic modelling of power plant self-consumption, storage inefficiency (only at charging time at the moment) and transmission/distribution losses in the grid.
+-   Export of hourly data to CSV.
+
 ## Example output
 
 The basic output of the model runner is the following table summarising the key flows in the model:
