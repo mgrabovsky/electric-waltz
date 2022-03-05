@@ -5,6 +5,7 @@ repo_url: https://github.com/mgrabovsky/electric-waltz
 repo_name: mgrabovsky/electric-waltz
 theme:
   name: material
+  icon: { logo: material/chart-sankey-variant }
 nav:
   - Overview: index.md
   - API Reference:
