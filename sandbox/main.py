@@ -54,6 +54,27 @@ class Statistics:
     def compute_total_import(self) -> Energy:
         return sum(net_import for net_import in self._net_import if net_import > 0)
 
+    def count_charging_steps(self) -> int:
+        return sum(
+            1 for step in range(self._steps)
+            if any(output[step] < 0 for output in self._storage_output.values())
+        )
+
+    def count_discharging_steps(self) -> int:
+        return sum(
+            1 for step in range(self._steps)
+            if any(output[step] > 0 for output in self._storage_output.values())
+        )
+
+    def count_generation_steps(self, source_name: str) -> int:
+        return sum(1 for generation in self._source_generation[source_name] if generation > 0)
+
+    def count_export_steps(self) -> int:
+        return sum(1 for net_import in self._net_import if net_import < 0)
+
+    def count_import_steps(self) -> int:
+        return sum(1 for net_import in self._net_import if net_import > 0)
+
     def set_cross_border(self, cross_border: CrossBorderTerminal) -> None:
         self._cross_border = cross_border
 
