@@ -1,8 +1,24 @@
 site_name: Electric Waltz
+site_description: A simple model of the electric energy system of the Czech Republic.
+site_url: https://mgrabovsky.net/electric-waltz/
+repo_url: https://github.com/mgrabovsky/electric-waltz
+repo_name: mgrabovsky/electric-waltz
 theme:
   name: material
+nav:
+  - Overview: index.md
+  - API Reference:
+    - Power Sources: source.md
+    - Storage: storage.md
+    - Dispatching: dispatch.md
+markdown_extensions:
+  - pymdownx.snippets:
+      check_paths: true
 plugins:
   - mkdocstrings:
       handlers:
         python:
           rendering: { show_source: false }
+      watch:
+        - electric_waltz/
+  - search
