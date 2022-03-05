@@ -181,7 +181,8 @@ def run(config, states: list[World]) -> Statistics:
             deficit = total_consumption - inflexible_generation
             # Try discharging as much storage as needed and possible.
             discharging = storage_dispatcher.discharge_at(deficit)
-            deficit -= discharging
+            # Clamp to hedge numerical instability.
+            deficit = max(0, deficit - discharging)
             # If consumption still dominates, try turning on flexible sources in
             # order of merit.
             if deficit > 0:
