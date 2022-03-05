@@ -39,7 +39,7 @@ The basic output of the model runner is the following table summarising the key 
 
 The runner also generates a CSV file with the generation/output of each electricity source in every hour of the modelled period. This data can be used to plot the time series of demand, power generation, import/export, etc., such as the following:
 
-![Stacked area chart showing in two rows the progress of electricity generation in two fortnights of the hypothetical year 2050.](model-generation-2050.png)
+![Stacked area chart showing in two rows the progress of electricity generation in two fortnights of the hypothetical year 2050.](https://raw.githubusercontent.com/mgrabovsky/electric-waltz/main/docs/model-generation-2050.png)
 
 ## History
 
