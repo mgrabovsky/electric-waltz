@@ -6,6 +6,7 @@ from .types import Power
 
 __all__ = ["CrossBorderTerminal"]
 
+
 class CrossBorderTerminal:
     """
     General class for any kind of cross-border transmission device.

@@ -102,7 +102,7 @@ class DispatchableSource(PowerSource):
     """
     Class representing dispatchable (flexible) sources of
     electricity and power plants. Typically, these include coal-fired,
-    hydroelectric, natural gas or biomass-fueled power plants.
+    hydroelectric, natural gas or biomass-fuelled power plants.
     """
 
     def dispatch_at(self, power: Power) -> Power:
