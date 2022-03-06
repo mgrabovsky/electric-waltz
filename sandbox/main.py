@@ -98,14 +98,14 @@ if __name__ == "__main__":
 
     total_consumption = sum(world.demand)
     total_flexible_generation = (
-        sum(stats._source_generation["hydro"])
-        + sum(stats._source_generation["biomass"])
-        + sum(stats._source_generation["gas"])
+        stats.compute_generation("hydro")
+        + stats.compute_generation("biomass")
+        + stats.compute_generation("gas")
     )
     total_inflexible_generation = (
-        sum(stats._source_generation["nuclear"])
-        + sum(stats._source_generation["pv"])
-        + sum(stats._source_generation["wind"])
+        stats.compute_generation("nuclear")
+        + stats.compute_generation("pv")
+        + stats.compute_generation("wind")
     )
     total_generation = total_flexible_generation + total_inflexible_generation
 
@@ -125,23 +125,34 @@ if __name__ == "__main__":
     dump_hours = stats.count_dump_steps()
     shortage_hours = stats.count_shortage_steps()
 
-    print(f"Total net generation:        {total_generation:12,.0f} MWh")
-    print(f"Total flexible generation:   {total_flexible_generation:12,.0f} MWh")
-    print(f"Total inflexible generation: {total_inflexible_generation:12,.0f} MWh")
-    print(f"Total charging consumption:  {total_charging:12,.0f} MWh "
+    print(f"Total net generation         {total_generation:12,.0f} MWh")
+    print(f"├─ Total inflexible          {total_inflexible_generation:12,.0f}")
+    print("│  ├─ Nuclear                {:12,.0f}".format(stats.compute_generation("nuclear")))
+    print("│  ├─ Solar PV               {:12,.0f}".format(stats.compute_generation("pv")))
+    print("│  └─ On-shore wind          {:12,.0f}".format(stats.compute_generation("wind")))
+    print(f"└─ Total flexible            {total_flexible_generation:12,.0f}")
+    print("   ├─ Hydro                  {:12,.0f}".format(stats.compute_generation("hydro")))
+    print("   ├─ Biomass                {:12,.0f}".format(stats.compute_generation("biomass")))
+    print("   └─ Natural gas            {:12,.0f}".format(stats.compute_generation("gas")))
+
+    print(f"\nTotal charging consumption   {total_charging:12,.0f} MWh "
           f"{charging_hours:6d} hrs")
-    print(f"Total discharging:           {total_discharging:12,.0f} MWh "
+    print(f"Total discharging            {total_discharging:12,.0f}     "
           f"{discharging_hours:6d} hrs")
-    print(f"Total export:                {total_export:12,.0f} MWh "
+    print(f"\nTotal export                 {total_export:12,.0f}     "
           f"{export_hours:6d} hrs")
-    print(f"Total import:                {total_import:12,.0f} MWh "
+    print(f"Total import                 {total_import:12,.0f}     "
           f"{import_hours:6d} hrs")
-    print(f"Total surplus/dump:          {total_dump:12,.0f} MWh "
+    print(f"Import balance               {total_import-total_export:12,.0f}")
+
+    print(f"\nTotal surplus/dump           {total_dump:12,.0f}     "
           f"{dump_hours:6d} hrs")
-    print(f"Total shortage (EENS/LOLE):  {total_shortage:12,.0f} MWh "
+    print(f"Total shortage (EENS/LOLE)   {total_shortage:12,.0f}     "
           f"{shortage_hours:6d} hrs")
 
-    print(f"\nTotal net consumption:       {total_consumption:12,.0f} MWh")
+    print(f"\nTotal net consumption        {total_consumption:12,.0f} MWh")
+
+    breakpoint
 
     model_output = DataFrame(data={
         "nuclear": stats._source_generation["nuclear"],

@@ -25,17 +25,27 @@ The model is wholly deterministic, i.e. the output is only affected by the suppl
 
 The basic output of the model runner is the following table summarising the key flows in the model:
 
-    Total net generation:         107,141,867 MWh
-    Total flexible generation:     46,625,280 MWh
-    Total inflexible generation:   60,516,587 MWh
-    Total charging consumption:     2,880,642 MWh
-    Total discharging:              1,986,646 MWh
-    Total export:                     540,868 MWh
-    Total import:                   3,189,288 MWh
-    Total dump:                       274,023 MWh
-    Total shortage:                 1,473,203 MWh
+    Total net generation          107,141,867 MWh
+    ├─ Total inflexible            60,516,587
+    │  ├─ Nuclear                  19,033,918
+    │  ├─ Solar PV                 23,951,325
+    │  └─ On-shore wind            17,531,344
+    └─ Total flexible              46,625,280
+       ├─ Hydro                     7,899,128
+       ├─ Biomass                  24,121,364
+       └─ Natural gas              14,604,788
 
-    Total consumption:            102,864,123 MWh
+    Total charging consumption      2,880,642 MWh   1061 hrs
+    Total discharging               1,986,646        770 hrs
+
+    Total export                      540,868        360 hrs
+    Total import                    3,189,288       2373 hrs
+    Import balance                  2,648,420
+
+    Total surplus/dump                274,023        172 hrs
+    Total shortage (EENS/LOLE)      1,473,203        997 hrs
+
+    Total net consumption         102,864,123 MWh
 
     Model output written to ‘sandbox/model_output.csv’
 
