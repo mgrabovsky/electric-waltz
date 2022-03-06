@@ -35,7 +35,7 @@ storage:
 # Cross-border electricity transmission -- export/import capacity in MW.
 cross_border:
   max_export: 2000
-  max_import: 2000
+  # max_import: 2000 # Currently unused
 
 consumption:
   # Losses in the transmission system compared to net consumption.

@@ -1,6 +1,6 @@
 # Electric Waltz
 
-> A simple model of the electric energy system of the Czech Republic.
+> A simple deterministc model of the electric energy system of the Czech Republic.
 
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
@@ -18,6 +18,8 @@ The basic features of the model currently include:
 -   Basic modelling of power plant self-consumption, storage inefficiency (only at charging time at the moment) and transmission/distribution losses in the grid.
 -   Configuration of grid elements and properties using a YAML file.
 -   Export of hourly data to CSV.
+
+The model is wholly deterministic, i.e. the output is only affected by the supplied input data and there are no elements of randomness in the simulation process.
 
 ## Example output
 
