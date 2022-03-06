@@ -13,6 +13,7 @@ nav:
     - Storage: storage.md
     - Dispatching: dispatch.md
     - Cross-Border Transmission: cross-border.md
+    - Scenarios: scenario.md
 markdown_extensions:
   - pymdownx.snippets:
       check_paths: true
