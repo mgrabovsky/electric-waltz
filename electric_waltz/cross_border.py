@@ -53,6 +53,6 @@ class CrossBorderTerminal:
     @property
     def net_import(self) -> Power:
         """
-        Return net imported power. This is negative export dominates.
+        Return net imported power. This value is negative if export dominates.
         """
         return self._net_import

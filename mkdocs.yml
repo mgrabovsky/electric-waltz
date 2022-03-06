@@ -12,6 +12,7 @@ nav:
     - Power Sources: source.md
     - Storage: storage.md
     - Dispatching: dispatch.md
+    - Cross-Border Transmission: cross-border.md
 markdown_extensions:
   - pymdownx.snippets:
       check_paths: true
