@@ -30,10 +30,10 @@ class ScenarioRun:
     ) -> None:
         """
         Arguments:
-            power_sources : Sequence of electricity sources in the grid.
-            storage_units : Sequence of electricity storage units/aggregates
+            power_sources: Sequence of electricity sources in the grid.
+            storage_units: Sequence of electricity storage units/aggregates
                 in the grid.
-            cross_border : Optional facility for cross-border export/import of
+            cross_border: Optional facility for cross-border export/import of
                 electric power.
         """
         self._power_sources = power_sources
@@ -136,20 +136,20 @@ class Scenario:
     ) -> None:
         """
         Arguments:
-            demand : Time series of net demand for each time step in MW.
-            baseload_sources : List of baseload power sources, e.g. nuclear power
+            demand: Time series of net demand for each time step in MW.
+            baseload_sources: List of baseload power sources, e.g. nuclear power
                 plants.
-            flexible_sources : List of dispatchable (flexible) power sources or peaking
+            flexible_sources: List of dispatchable (flexible) power sources or peaking
                 power plants, e.g. biomass or natural gas-fuelled power plants. Merit
                 order (order of dispatch) is given by the position of the source in
                 the sequence.
-            intermittent_sources : List of intermittent (inflexible) power sources,
+            intermittent_sources: List of intermittent (inflexible) power sources,
                 e.g. wind or solar photovoltaic power plants. The second entry in the
                 tuple is a time series of capacity factor for the source in each time
                 step.
-            storage_units : List of electricity storage units.
-            cross_border : A single cross-border export/import facility.
-            grid_losses : Losses in the grid (transmission and distribution) as a
+            storage_units: List of electricity storage units.
+            cross_border: A single cross-border export/import facility.
+            grid_losses: Losses in the grid (transmission and distribution) as a
                 portion of net demand. A number in the interval [0, 1).
         """
         assert 0 <= grid_losses < 1

@@ -25,12 +25,12 @@ class EnergyStorage:
     ) -> None:
         """
         Arguments:
-            name : Short textual identifier of the storage aggregate, e.g. "p2g"
+            name: Short textual identifier of the storage aggregate, e.g. "p2g"
                 or "pumped".
-            capacity : Nominal (installed) capacity of the storage unit in MW.
-            max_storage : Maximum stored energy in MWh.
-            efficiency : Efficiency of conversion during charging, a number in the
-                interval (0.0,1.0]. In the current implementation, this is the same
+            capacity: Nominal (installed) capacity of the storage unit in MW.
+            max_storage: Maximum stored energy in MWh.
+            efficiency: Efficiency of conversion during charging, a number in the
+                interval (0.0, 1.0]. In the current implementation, this is the same
                 as the round-trip efficiency.
         """
         assert 0 < len(name)
@@ -51,7 +51,7 @@ class EnergyStorage:
         Try charging the storage unit with up to `power` MW.
 
         Arguments:
-            power : Power that is available for charging in MW.
+            power: Power that is available for charging in MW.
 
         Returns:
             Effective charging power in MW.
@@ -73,7 +73,7 @@ class EnergyStorage:
         Try discharging the storage unit up to `required` MW.
 
         Arguments:
-            power : Power that is requested to be discharged in MW.
+            power: Power that is requested to be discharged in MW.
 
         Returns:
             Effective discharging power in MW.

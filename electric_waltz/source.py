@@ -28,13 +28,13 @@ class PowerSource:
         Create an electricity source object.
 
         Arguments:
-            name : Short textual identifier of the source, e.g. "wind" or "nuclear".
-            capacity : Nominal (or nameplate, installed) capacity of the
+            name: Short textual identifier of the source, e.g. "wind" or "nuclear".
+            capacity: Nominal (or nameplate, installed) capacity of the
                 source in MW.
-            self_consumption : Portion of generated power that is
+            self_consumption: Portion of generated power that is
                 consumed by the source itself to keep running. A number
                 in the range [0, 1].
-            utilisation : Initial utilisation (or capacity factor) of
+            utilisation: Initial utilisation (or capacity factor) of
                 the source. A number in the range [0, 1].
         """
         assert 0 < len(name)
@@ -81,7 +81,7 @@ class PowerSource:
         Set the source's capacity factor.
 
         Arguments:
-            value : The new capacity factor. Must be a number in the
+            value: The new capacity factor. Must be a number in the
                 range [0, 1].
         """
         assert 0 <= value <= 1
@@ -112,7 +112,7 @@ class DispatchableSource(PowerSource):
         the nominal capacity.
 
         Arguments:
-            power : The requested power generation.
+            power: The requested power generation.
 
         Returns:
             Net power generation of the source after the dispatch request.

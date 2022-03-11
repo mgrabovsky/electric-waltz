@@ -16,7 +16,7 @@ class CrossBorderTerminal:
     def __init__(self, capacity: Power) -> None:
         """
         Arguments:
-            capacity : Nominal maximum capacity of the terminal in MW.
+            capacity: Nominal maximum capacity of the terminal in MW.
         """
         self._capacity = capacity
         self._net_import: Power = 0
@@ -26,7 +26,7 @@ class CrossBorderTerminal:
         Request the export of at most `power` MW of electricity through the terminal.
 
         Arguments:
-            power : Requested power in MW.
+            power: Requested power in MW.
 
         Returns:
             Net exported power after the adjustment.
@@ -41,7 +41,7 @@ class CrossBorderTerminal:
         Request the import of at most `power` MW of electricity through the terminal.
 
         Arguments:
-            power : Requested power in MW.
+            power: Requested power in MW.
 
         Returns:
             Net imported power after the adjustment.
