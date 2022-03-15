@@ -39,6 +39,8 @@ cross_border:
 
 consumption:
   # Losses in the transmission system compared to net consumption.
-  transmission_loss: .02
+  transmission_loss:  .02
   # Losses in the distribution system compared to net consumption.
-  distribution_loss: .05_03
+  distribution_loss:  .05_03
+  # Global multiplication factor for the load time series.
+  load_multiplier:   1.60

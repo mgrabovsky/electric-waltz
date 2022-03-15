@@ -78,6 +78,10 @@ def main(args: argparse.Namespace) -> None:
     with open(args.config_file, encoding="utf-8") as config_file:
         config = YAML(typ="safe").load(config_file)
 
+    if "load_multiplier" in config["consumption"]:
+        load_multiplier = float(config["consumption"]["load_multiplier"])
+        world.load *= load_multiplier
+
     grid_losses: float = (
         config["consumption"]["transmission_loss"]
         + config["consumption"]["distribution_loss"]
