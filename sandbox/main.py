@@ -1,5 +1,7 @@
+import argparse
 import csv
-from typing import cast, Optional
+import time
+from typing import cast
 
 from pandas import DataFrame, read_csv
 from ruamel.yaml import YAML
@@ -50,12 +52,31 @@ def make_storage(kind: str, config) -> EnergyStorage:
     )
 
 
-if __name__ == "__main__":
-    world = read_csv("sandbox/input_data.csv", names=("demand", "solar_util", "wind_util"))
+def main(args: argparse.Namespace) -> None:
+    world = read_csv(args.world_file)
 
-    with open("sandbox/config.yml", encoding="utf-8") as config_file:
-        yaml = YAML(typ="safe")
-        config = yaml.load(config_file)
+    if "load" not in world or "solar_util" not in world or "wind_util" not in world:
+        raise ValueError(
+            "The world state CSV file must contain columns named ‘load’, "
+            "‘solar_util’ and ‘wind_util’."
+        )
+
+    if args.year is not None:
+        if "year" not in world:
+            raise ValueError(
+                "The world state CSV file must contain a column named ‘year’ if selection "
+                "by year is used."
+            )
+
+        world = world[world["year"] == args.year]
+        if world.empty:
+            raise ValueError(
+                "The world state CSV file must contain at least one row with year equal to "
+                "{args.year}."
+            )
+
+    with open(args.config_file, encoding="utf-8") as config_file:
+        config = YAML(typ="safe").load(config_file)
 
     grid_losses: float = (
         config["consumption"]["transmission_loss"]
@@ -63,9 +84,9 @@ if __name__ == "__main__":
     )
 
     # Inflexible power plants.
-    nuclear = make_power_plant("nuclear", config)
-    pv = make_power_plant("pv", config)
-    wind = make_power_plant("wind", config)
+    nuclear = cast(NonDispatchableSource, make_power_plant("nuclear", config))
+    pv = cast(NonDispatchableSource, make_power_plant("pv", config))
+    wind = cast(NonDispatchableSource, make_power_plant("wind", config))
 
     # Flexible power plants.
     hydro = cast(DispatchableSource, make_power_plant("hydro", config))
@@ -82,7 +103,7 @@ if __name__ == "__main__":
 
     # Construct the scenario object and run the simulation.
     scenario = Scenario(
-        demand=world.demand,
+        load=world.load,
         baseload_sources=[nuclear],
         intermittent_sources=[
             (pv, world.solar_util),
@@ -94,9 +115,11 @@ if __name__ == "__main__":
         grid_losses=grid_losses,
     )
 
+    start_time = time.perf_counter_ns()
     stats = scenario.run()
+    finish_time = time.perf_counter_ns()
 
-    total_consumption = sum(world.demand)
+    total_consumption = sum(world.load)
     total_flexible_generation = (
         stats.compute_generation("hydro")
         + stats.compute_generation("biomass")
@@ -135,38 +158,86 @@ if __name__ == "__main__":
     print("   ├─ Biomass                {:12,.0f}".format(stats.compute_generation("biomass")))
     print("   └─ Natural gas            {:12,.0f}".format(stats.compute_generation("gas")))
 
-    print(f"\nTotal charging consumption   {total_charging:12,.0f} MWh "
-          f"{charging_hours:6d} hrs")
-    print(f"Total discharging            {total_discharging:12,.0f}     "
-          f"{discharging_hours:6d} hrs")
-    print(f"\nTotal export                 {total_export:12,.0f}     "
-          f"{export_hours:6d} hrs")
-    print(f"Total import                 {total_import:12,.0f}     "
-          f"{import_hours:6d} hrs")
+    print(
+        f"\nTotal charging consumption   {total_charging:12,.0f} MWh "
+        f"{charging_hours:6d} hrs"
+    )
+    print(
+        f"Total discharging            {total_discharging:12,.0f}     "
+        f"{discharging_hours:6d} hrs"
+    )
+    print(
+        f"\nTotal export                 {total_export:12,.0f}     "
+        f"{export_hours:6d} hrs"
+    )
+    print(
+        f"Total import                 {total_import:12,.0f}     "
+        f"{import_hours:6d} hrs"
+    )
     print(f"Import balance               {total_import-total_export:12,.0f}")
 
-    print(f"\nTotal surplus/dump           {total_dump:12,.0f}     "
-          f"{dump_hours:6d} hrs")
-    print(f"Total shortage (EENS/LOLE)   {total_shortage:12,.0f}     "
-          f"{shortage_hours:6d} hrs")
+    print(
+        f"\nTotal surplus/dump           {total_dump:12,.0f}     "
+        f"{dump_hours:6d} hrs"
+    )
+    print(
+        f"Total shortage (EENS/LOLE)   {total_shortage:12,.0f}     "
+        f"{shortage_hours:6d} hrs"
+    )
 
-    print(f"\nTotal net consumption        {total_consumption:12,.0f} MWh")
+    print(f"\nTotal net consumption        {total_consumption:12,.0f} MWh\n")
 
-    breakpoint
+    if args.output_file is not None:
+        model_output = DataFrame(
+            data={
+                "nuclear": stats._source_generation["nuclear"],
+                "pv": stats._source_generation["pv"],
+                "wind": stats._source_generation["wind"],
+                "biomass": stats._source_generation["biomass"],
+                "hydro": stats._source_generation["hydro"],
+                "gas": stats._source_generation["gas"],
+                "pumped": stats._storage_output["pumped"],
+                "battery": stats._storage_output["battery"],
+                "p2g": stats._storage_output["p2g"],
+                "import": stats._net_import,
+                "shortage": stats._shortage,
+            }
+        )
+        model_output.to_csv(args.output_file, index_label="ix")
+        print(f"Model output written to ‘{args.output_file}’")
 
-    model_output = DataFrame(data={
-        "nuclear": stats._source_generation["nuclear"],
-        "pv": stats._source_generation["pv"],
-        "wind": stats._source_generation["wind"],
-        "biomass": stats._source_generation["biomass"],
-        "hydro": stats._source_generation["hydro"],
-        "gas": stats._source_generation["gas"],
-        "pumped": stats._storage_output["pumped"],
-        "battery": stats._storage_output["battery"],
-        "p2g": stats._storage_output["p2g"],
-        "import": stats._net_import,
-        "shortage": stats._shortage,
-    })
-    model_output.to_csv("sandbox/model_output.csv", index_label="ix")
+    print("Calculation took {:.1f} ms".format((finish_time - start_time) / 1e6))
 
-    print("\nModel output written to ‘sandbox/model_output.csv’")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Run a simulation of the model with given parameters and input data"
+    )
+    parser.add_argument(
+        "-o", "--output-file", help="Write model output to the given CSV file."
+    )
+    parser.add_argument(
+        "-y",
+        "--year",
+        type=int,
+        help="Select a specific year from the input world state to use "
+        "for the simulation.",
+    )
+    parser.add_argument(
+        "-c",
+        "--config-file",
+        required=True,
+        help="YAML file containing configuration of various elements " "of the grid.",
+    )
+    parser.add_argument(
+        "-w",
+        "--world-file",
+        required=True,
+        help="CSV file containing data on world state. Must contain "
+        "at least the columns ‘load’, ‘solar_util’ and ‘wind_util’. "
+        "If selection by year is used, a ‘year’ column must be "
+        "present as well.",
+    )
+    args = parser.parse_args()
+
+    main(args)
