@@ -68,11 +68,11 @@ def main(args: argparse.Namespace) -> None:
                 "by year is used."
             )
 
-        world = world[world["year"] == args.year]
+        world = world[world["year"] == args.year].reset_index(drop=True)
         if world.empty:
             raise ValueError(
                 "The world state CSV file must contain at least one row with year equal to "
-                "{args.year}."
+                f"{args.year}."
             )
 
     with open(args.config_file, encoding="utf-8") as config_file:
