@@ -4,13 +4,12 @@ library(tidyverse)
 theme_set(theme_classic())
 
 d <- cbind(
-  read_csv('input_data.csv',
-           col_names = c('demand', 'pv_util', 'wind_util')),
-  read_csv('model_output.csv')
+  read_csv('sandbox/input_data.csv'),
+  read_csv('sandbox/model_output.csv')
 ) %>% as_tibble() %>%
   mutate(ix = 1:nrow(.) - 1,
          dt = as.POSIXct(3600 * ix, tz = 'UTC+1', origin = '2050-01-01 00:00'),
-         .before = 'demand') %>%
+         .before = 'load') %>%
   mutate(storage = pumped + battery + p2g)
 
 plot_power_series <- function(df) {
@@ -20,8 +19,8 @@ plot_power_series <- function(df) {
                                       'hydro', 'import', 'storage', 'shortage'))) %>%
     ggplot(aes(dt, power)) +
     geom_area(aes(fill = type)) +
-    geom_line(aes(y = demand * 1.0703),
-              data = select(df, dt, demand),
+    geom_line(aes(y = load * 1.0703),
+              data = select(df, dt, load),
               size = 1) +
     xlab('Day of year') +
     scale_y_continuous('Instant power (GW)',
@@ -53,3 +52,4 @@ p1 <- plot_power_series(slice(d, 1:(2*168))) +
 p2 <- plot_power_series(slice(d, (25*168):(27*168)))
 
 p1 / p2
+
