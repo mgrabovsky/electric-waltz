@@ -30,7 +30,7 @@ storage:
   efficiency:
     pumped:  .76_76
     battery: .85
-    p2g:     .5
+    p2g:     .38
 
 # Cross-border electricity transmission -- export/import capacity in MW.
 cross_border:
