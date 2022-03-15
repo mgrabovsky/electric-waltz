@@ -29,7 +29,7 @@ class PowerSource:
 
         Arguments:
             name: Short textual identifier of the source, e.g. "wind" or "nuclear".
-            capacity: Nominal (or nameplate, installed) capacity of the
+            nominal: Nominal (or nameplate, installed) capacity of the
                 source in MW.
             self_consumption: Portion of generated power that is
                 consumed by the source itself to keep running. A number
