@@ -3,7 +3,7 @@ Structures for working with clearly defined scenarios.
 """
 from __future__ import annotations
 from collections import defaultdict
-from typing import cast, Optional
+from typing import cast, Optional, Sequence
 
 from .cross_border import CrossBorderTerminal
 from .dispatch import (
@@ -24,8 +24,8 @@ __all__ = ["Scenario", "ScenarioRun"]
 class ScenarioRun:
     def __init__(
         self,
-        power_sources: list[PowerSource],
-        storage_units: list[EnergyStorage],
+        power_sources: Sequence[PowerSource],
+        storage_units: Sequence[EnergyStorage],
         cross_border: Optional[CrossBorderTerminal] = None,
     ) -> None:
         """
@@ -41,8 +41,8 @@ class ScenarioRun:
         self._cross_border = cross_border
 
         self._steps: int = 0
-        self._source_generation: dict[str, list[Power]] = defaultdict(list)
-        self._storage_output: dict[str, list[Power]] = defaultdict(list)
+        self._source_generation: dict[str, Sequence[Power]] = defaultdict(list)
+        self._storage_output: dict[str, Sequence[Power]] = defaultdict(list)
         self._net_import: list[Power] = []
         # Shortage (positive) or dump (negative).
         self._shortage: list[Power] = []
@@ -127,10 +127,10 @@ class Scenario:
         self,
         *,
         demand: Sequence[Power],
-        baseload_sources: list[NonDispatchableSource],
-        flexible_sources: list[DispatchableSource],
-        intermittent_sources: list[tuple[NonDispatchableSource, Sequence[float]]],
-        storage_units: list[EnergyStorage],
+        baseload_sources: Sequence[NonDispatchableSource],
+        flexible_sources: Sequence[DispatchableSource],
+        intermittent_sources: Sequence[tuple[NonDispatchableSource, Sequence[float]]],
+        storage_units: Sequence[EnergyStorage],
         cross_border: Optional[CrossBorderTerminal] = None,
         grid_losses: float = 0.0,
     ) -> None:
