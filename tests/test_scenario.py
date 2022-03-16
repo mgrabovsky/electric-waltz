@@ -13,7 +13,7 @@ class ScenarioTestCase(TestCase):
 
     def test_init(self):
         scenario = Scenario(
-            demand=[],
+            load=[],
             baseload_sources=[],
             flexible_sources=[],
             intermittent_sources=[],
@@ -24,7 +24,7 @@ class ScenarioTestCase(TestCase):
 
     def test_init_nonempty(self):
         scenario = Scenario(
-            demand=[111, 132, 145],
+            load=[111, 132, 145],
             baseload_sources=[],
             flexible_sources=[],
             intermittent_sources=[
@@ -38,7 +38,7 @@ class ScenarioTestCase(TestCase):
     def test_init_wrong_dimensions(self):
         with self.assertRaises(ValueError):
             scenario = Scenario(
-                demand=[111, 132, 145],
+                load=[111, 132, 145],
                 baseload_sources=[],
                 flexible_sources=[],
                 intermittent_sources=[
@@ -50,7 +50,7 @@ class ScenarioTestCase(TestCase):
     def test_init_invalid_cap_factor(self):
         with self.assertRaises(ValueError):
             scenario = Scenario(
-                demand=[111, 132, 145],
+                load=[111, 132, 145],
                 baseload_sources=[],
                 flexible_sources=[],
                 intermittent_sources=[
