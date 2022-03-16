@@ -2,7 +2,7 @@
 Objects for dispatching flexible power sources.
 """
 
-from collections.abc import Sequence
+from __future__ import annotations
 
 from .source import DispatchableSource
 from .storage import EnergyStorage
@@ -15,7 +15,7 @@ __all__ = [
 
 
 class SourceDispatcher:
-    def __init__(self, units: Sequence[DispatchableSource]) -> None:
+    def __init__(self, units: list[DispatchableSource]) -> None:
         """
         Arguments:
             units: Finite sequence of dispatchable power sources that

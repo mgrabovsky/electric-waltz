@@ -1,8 +1,8 @@
 """
 Structures for working with clearly defined scenarios.
 """
+from __future__ import annotations
 from collections import defaultdict
-from collections.abc import Sequence
 from typing import cast, Optional
 
 from .cross_border import CrossBorderTerminal
@@ -24,8 +24,8 @@ __all__ = ["Scenario", "ScenarioRun"]
 class ScenarioRun:
     def __init__(
         self,
-        power_sources: Sequence[PowerSource],
-        storage_units: Sequence[EnergyStorage],
+        power_sources: list[PowerSource],
+        storage_units: list[EnergyStorage],
         cross_border: Optional[CrossBorderTerminal] = None,
     ) -> None:
         """
@@ -198,11 +198,15 @@ class Scenario:
         """
         num_steps = len(self._demand)
 
-        power_sources = (
-            cast(list[PowerSource], self._baseloads)
-            + cast(list[PowerSource], [source for source, _ in self._intermittents])
-            + cast(list[PowerSource], self._flexibles)
-        )
+        # power_sources = (
+        #     cast(list[PowerSource], self._baseloads)
+        #     + cast(list[PowerSource], [source for source, _ in self._intermittents])
+        #     + cast(list[PowerSource], self._flexibles)
+        # )
+
+        # The code above was failing in Python 3.8 even with "from __future__ import annotations"...
+        power_sources = self._baseloads + [source for source, _ in self._intermittents] + self._flexibles
+        
         stats = ScenarioRun(
             power_sources=power_sources,
             storage_units=self._storages,
