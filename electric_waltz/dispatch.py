@@ -2,7 +2,8 @@
 Objects for dispatching flexible power sources.
 """
 
-from collections.abc import Sequence
+from __future__ import annotations
+from typing import Sequence
 
 from .source import DispatchableSource
 from .storage import EnergyStorage
@@ -44,7 +45,7 @@ class SourceDispatcher:
 
 
 class StorageDispatcher:
-    def __init__(self, units: list[EnergyStorage]) -> None:
+    def __init__(self, units: Sequence[EnergyStorage]) -> None:
         self._units = units
 
     def charge_at(self, power: Power) -> Power:
