@@ -3,7 +3,7 @@ Structures for working with clearly defined scenarios.
 """
 from __future__ import annotations
 from collections import defaultdict
-from typing import cast, Optional, Sequence
+from typing import cast, List, Optional, Sequence
 
 from .cross_border import CrossBorderTerminal
 from .dispatch import (
@@ -41,8 +41,8 @@ class ScenarioRun:
         self._cross_border = cross_border
 
         self._steps: int = 0
-        self._source_generation: dict[str, Sequence[Power]] = defaultdict(list)
-        self._storage_output: dict[str, Sequence[Power]] = defaultdict(list)
+        self._source_generation: dict[str, List[Power]] = defaultdict(list)
+        self._storage_output: dict[str, List[Power]] = defaultdict(list)
         self._net_import: list[Power] = []
         # Shortage (positive) or dump (negative).
         self._shortage: list[Power] = []
@@ -198,14 +198,11 @@ class Scenario:
         """
         num_steps = len(self._load)
 
-        # power_sources = (
-        #     cast(list[PowerSource], self._baseloads)
-        #     + cast(list[PowerSource], [source for source, _ in self._intermittents])
-        #     + cast(list[PowerSource], self._flexibles)
-        # )
-
-        # The code above was failing in Python 3.8 even with "from __future__ import annotations"...
-        power_sources = self._baseloads + [source for source, _ in self._intermittents] + self._flexibles
+        power_sources = (
+            cast(List[PowerSource], self._baseloads)
+            + cast(List[PowerSource], [source for source, _ in self._intermittents])
+            + cast(List[PowerSource], self._flexibles)
+        )
         
         stats = ScenarioRun(
             power_sources=power_sources,

@@ -7,7 +7,7 @@ name = "electric_waltz"
 authors = [{name = "Mat\u011bj Grabovsk\u00fd", email = "matej@mgrabovsky.net"}]
 dynamic = ["version", "description"]
 description-file = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 
 [project.urls]
 Home = "https://github.com/mgrabovsky/electric-waltz"
