@@ -203,7 +203,7 @@ class Scenario:
             + cast(List[PowerSource], [source for source, _ in self._intermittents])
             + cast(List[PowerSource], self._flexibles)
         )
-        
+
         stats = ScenarioRun(
             power_sources=power_sources,
             storage_units=self._storages,
@@ -240,7 +240,8 @@ class Scenario:
             # Preemptively turn off flexible sources.
             self._flexibles_dispatcher.shut_down_all()
 
-            surplus = inflexible_generation - consumption
+            flexible_generation = self._flexibles_dispatcher.net_generation
+            surplus = inflexible_generation + flexible_generation - consumption
 
             # Try charging storage if necessary.
             charging = self._storage_dispatcher.charge_at(surplus)

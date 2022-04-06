@@ -7,6 +7,7 @@ plants:
     hydro:     1081 # Run-of-the-river hydro
     biomass:   3980
     gas:       3648 # Natural gas
+    coal:      5000 # Hard coal, lignite, ... what-have-you
   # Technological self-consumption of power plant types.
   self_consumption:
     nuclear: .05_50
@@ -15,6 +16,11 @@ plants:
     hydro:   .00_80
     biomass: .09_26
     gas:     .03
+    coal:    .10
+  min_load:     { coal:  0.40 }
+  min_downtime: { coal:  4 }
+  min_uptime:   { coal: 10 }
+  startup_time: { coal:  6 }
 
 storage:
   # Nominal installed capacity in MW.

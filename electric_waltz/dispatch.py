@@ -40,8 +40,12 @@ class SourceDispatcher:
             generation += unit.dispatch_at(max(0, power - generation))
 
         # Allow for some numeric error.
-        assert generation - power <= 1e-6
+        # assert generation - power <= 1e-6
         return generation
+
+    @property
+    def net_generation(self) -> Power:
+        return sum(unit.net_generation for unit in self._units)
 
 
 class StorageDispatcher:

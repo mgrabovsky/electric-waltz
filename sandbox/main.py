@@ -14,6 +14,7 @@ from electric_waltz.source import (
     DispatchableSource,
     NonDispatchableSource,
     PowerSource,
+    ThermalPowerPlant,
 )
 from electric_waltz.storage import EnergyStorage
 from electric_waltz.types import Energy, Power
@@ -94,9 +95,18 @@ def main(args: argparse.Namespace) -> None:
     wind = cast(NonDispatchableSource, make_power_plant("wind", config))
 
     # Flexible power plants.
-    hydro = cast(DispatchableSource, make_power_plant("hydro", config))
-    biomass = cast(DispatchableSource, make_power_plant("biomass", config))
+    # hydro = cast(DispatchableSource, make_power_plant("hydro", config))
+    # biomass = cast(DispatchableSource, make_power_plant("biomass", config))
     gas = cast(DispatchableSource, make_power_plant("gas", config))
+    coal = ThermalPowerPlant(
+        name="coal",
+        nominal=5000,
+        self_consumption=0.10,
+        min_load=0.40,
+        min_downtime=4,
+        min_uptime=10,
+        startup_time=6,
+    )
 
     # Electricity storage.
     pumped = make_storage("pumped", config)
@@ -114,7 +124,8 @@ def main(args: argparse.Namespace) -> None:
             (pv, world.solar_util),
             (wind, world.wind_util),
         ],
-        flexible_sources=[hydro, biomass, gas],
+        # flexible_sources=[hydro, biomass, gas],
+        flexible_sources=[coal, gas],
         storage_units=[pumped, battery, p2g],
         cross_border=cross_border,
         grid_losses=grid_losses,
@@ -126,9 +137,10 @@ def main(args: argparse.Namespace) -> None:
 
     total_consumption = sum(world.load)
     total_flexible_generation = (
-        stats.compute_generation("hydro")
-        + stats.compute_generation("biomass")
-        + stats.compute_generation("gas")
+        stats.compute_generation("gas")
+        # stats.compute_generation("hydro")
+        # + stats.compute_generation("biomass")
+        # + stats.compute_generation("gas")
     )
     total_inflexible_generation = (
         stats.compute_generation("nuclear")
@@ -159,8 +171,9 @@ def main(args: argparse.Namespace) -> None:
     print("│  ├─ Solar PV               {:12,.0f}".format(stats.compute_generation("pv")))
     print("│  └─ On-shore wind          {:12,.0f}".format(stats.compute_generation("wind")))
     print(f"└─ Total flexible            {total_flexible_generation:12,.0f}")
-    print("   ├─ Hydro                  {:12,.0f}".format(stats.compute_generation("hydro")))
-    print("   ├─ Biomass                {:12,.0f}".format(stats.compute_generation("biomass")))
+    # print("   ├─ Hydro                  {:12,.0f}".format(stats.compute_generation("hydro")))
+    # print("   ├─ Biomass                {:12,.0f}".format(stats.compute_generation("biomass")))
+    print("   ├─ Coal                   {:12,.0f}".format(stats.compute_generation("coal")))
     print("   └─ Natural gas            {:12,.0f}".format(stats.compute_generation("gas")))
 
     print(
@@ -198,8 +211,9 @@ def main(args: argparse.Namespace) -> None:
                 "nuclear": stats._source_generation["nuclear"],
                 "pv": stats._source_generation["pv"],
                 "wind": stats._source_generation["wind"],
-                "biomass": stats._source_generation["biomass"],
-                "hydro": stats._source_generation["hydro"],
+                # "biomass": stats._source_generation["biomass"],
+                # "hydro": stats._source_generation["hydro"],
+                "coal": stats._source_generation["coal"],
                 "gas": stats._source_generation["gas"],
                 "pumped": stats._storage_output["pumped"],
                 "battery": stats._storage_output["battery"],
