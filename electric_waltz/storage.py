@@ -34,8 +34,6 @@ class EnergyStorage:
                 as the round-trip efficiency.
         """
         assert 0 < len(name)
-        assert 0 < nominal
-        assert 0 < max_storage
         assert 0 < efficiency <= 1
 
         self._name = name
