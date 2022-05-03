@@ -1,0 +1,51 @@
+plants:
+  # Installed capacity of various types of power plants in MW.
+  installed:
+    nuclear:   4290
+    pv:        2061 # Photovoltaic solar
+    wind:       339
+    hydro:     1094 # Run-of-the-river hydro
+    biomass:   1193
+    # coal:      9802
+    gas:       1714 # Natural gas
+  # Technological self-consumption of power plant types.
+  self_consumption:
+    nuclear: .05_50
+    pv:      .00_89
+    wind:    .01_29
+    hydro:   .00_80
+    biomass: .09_26
+    # coal:    .09_94
+    gas:     .03
+
+storage:
+  # Nominal installed capacity in MW.
+  installed:
+    pumped:  1170 # Water pumped storage
+    battery:    0
+    p2g:        0 # Power-to-gas
+  # Maximum energy storage capacity in MWh.
+  max_energy:
+    pumped:    6260
+      # 3700 Dlouhé Stráně (https://energie21.cz/dlouhe-strane-udrzuji-stabilitu-site/)
+      # 260 Štěchovice (according to values at https://cs.wikipedia.org/wiki/P%C5%99e%C4%8Derp%C3%A1vac%C3%AD_vodn%C3%AD_elektr%C3%A1rna_%C5%A0t%C4%9Bchovice)
+      # 2300 Dalešice (https://oenergetice.cz/elektrarny-cr/precerpavaci-vodni-elektrarna-dalesice-je-v-provozu-jiz-40-let)
+    battery:      0
+    p2g:          0
+  efficiency:
+    pumped:  .76_76
+    battery: .85
+    p2g:     .38
+
+# Cross-border electricity transmission -- export/import capacity in MW.
+cross_border:
+  max_export: 2000
+  # max_import: 2000 # Currently unused
+
+consumption:
+  # Losses in the transmission system compared to net consumption.
+  transmission_loss:  .02
+  # Losses in the distribution system compared to net consumption.
+  distribution_loss:  .05_03
+  # Global multiplication factor for the load time series.
+  load_multiplier:   1.0
