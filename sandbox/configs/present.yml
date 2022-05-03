@@ -6,7 +6,7 @@ plants:
     wind:       339
     hydro:     1094 # Run-of-the-river hydro
     biomass:   1193
-    # coal:      9802
+    coal:      9802
     gas:       1714 # Natural gas
   # Technological self-consumption of power plant types.
   self_consumption:
@@ -15,7 +15,7 @@ plants:
     wind:    .01_29
     hydro:   .00_80
     biomass: .09_26
-    # coal:    .09_94
+    coal:    .09_94
     gas:     .03
 
 storage:
