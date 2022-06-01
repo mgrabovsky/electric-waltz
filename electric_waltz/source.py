@@ -209,7 +209,9 @@ class ThermalPowerPlant(DispatchableSource):
         self._min_uptime = min_uptime
         self._startup_time = startup_time
 
-        self._state: ThermalPowerPlant._State = ThermalPowerPlant._ShutDown(min_downtime)
+        self._state: ThermalPowerPlant._State = ThermalPowerPlant._ShutDown(
+            min_downtime
+        )
 
     def dispatch_at(self, power: Power) -> Power:
         """
@@ -232,6 +234,7 @@ class ThermalPowerPlant(DispatchableSource):
 
         if self.is_shut_down:
             assert self.net_generation == 0
+            assert isinstance(self._state, ThermalPowerPlant._ShutDown)
             if (
                 # We do not start firing up until the demand reaches at least
                 # the minimum required load.
@@ -249,6 +252,7 @@ class ThermalPowerPlant(DispatchableSource):
             assert 0 <= self._utilisation <= 1
         elif self.is_starting_up:
             assert self._startup_time > 0
+            assert isinstance(self._state, ThermalPowerPlant._StartingUp)
             if self._state.phase == self._startup_time:
                 self._run()
                 if power < self._min_load * self._nominal_capacity:
@@ -260,7 +264,12 @@ class ThermalPowerPlant(DispatchableSource):
                     self._utilisation = required_factor
             else:
                 self._state.step()
-                self._utilisation = self._state.phase / self._startup_time * self._min_load / (1 - self._self_consumption)
+                self._utilisation = (
+                    self._state.phase
+                    / self._startup_time
+                    * self._min_load
+                    / (1 - self._self_consumption)
+                )
         else:
             assert isinstance(self._state, ThermalPowerPlant._Running)
 
