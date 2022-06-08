@@ -6,6 +6,7 @@ plants:
     wind:      8777
     hydro:     1081 # Run-of-the-river hydro
     biomass:   3980
+    coal:         0
     gas:       3648 # Natural gas
     coal:      5000 # Hard coal, lignite, ... what-have-you
   # Technological self-consumption of power plant types.
@@ -15,6 +16,7 @@ plants:
     wind:    .01_29
     hydro:   .00_80
     biomass: .09_26
+    coal:    .09_94
     gas:     .03
     coal:    .10
   min_load:     { coal:  0.40 }

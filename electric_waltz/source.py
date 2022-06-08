@@ -41,7 +41,6 @@ class PowerSource:
                 the source. A number in the range [0, 1].
         """
         assert 0 < len(name)
-        assert 0 < nominal
         assert 0 <= self_consumption < 1
         assert 0 <= utilisation <= 1
 
@@ -122,11 +121,13 @@ class DispatchableSource(PowerSource):
         """
         assert power >= 0
 
-        max_net_power = self._nominal_capacity * (1 - self._self_consumption)
-
-        # Explicitly cap the capacity factor at 1.0. An overflow might sometimes occur
-        # following some ordinary floating-point manipulations.
-        self._utilisation = min(power / max_net_power, 1)
+        if self._nominal_capacity == 0:
+            self._utilisation = 0
+        else:
+            max_net_power = self._nominal_capacity * (1 - self._self_consumption)
+            # Explicitly cap the capacity factor at 1.0. An overflow might sometimes occur
+            # following some ordinary floating-point manipulations.
+            self._utilisation = min(power / max_net_power, 1)
 
         assert 0 <= self._utilisation <= 1
         return self.net_generation
