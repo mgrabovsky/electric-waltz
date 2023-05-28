@@ -20,10 +20,10 @@ jobs:
       PYTHON_VERSION_COVERAGE: '3.11'
     steps:
       - name: Check out sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
@@ -34,7 +34,7 @@ jobs:
         run: tox -v -e ${{ matrix.tox }}
 
       - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         if: contains(env.PYTHON_VERSION_COVERAGE, matrix.name)
         with:
           fail_ci_if_error: true
@@ -42,7 +42,7 @@ jobs:
           verbose: true
 
       - name: Upload coverage report to CodeClimate
-        uses: paambaati/codeclimate-action@v3.0.0
+        uses: paambaati/codeclimate-action@v4
         if: contains(env.PYTHON_VERSION_COVERAGE, matrix.name)
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
