@@ -199,7 +199,7 @@ def main(args: argparse.Namespace) -> None:
         f"{dump_hours:6d} hrs"
     )
     print(
-        f"Total shortage (EENS/LOLE)   {total_shortage:12,.0f}     "
+        f"Total shortage (EENS, LOLE)  {total_shortage:12,.0f}     "
         f"{shortage_hours:6d} hrs"
     )
 

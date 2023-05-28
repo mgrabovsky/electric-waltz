@@ -44,7 +44,7 @@ The basic output of the model runner is the following table summarising the key 
     Import balance                  2,648,420
 
     Total surplus/dump                274,023        172 hrs
-    Total shortage (EENS/LOLE)      1,473,203        997 hrs
+    Total shortage (EENS, LOLE)     1,473,203        997 hrs
 
     Total net consumption         102,864,123 MWh
 
