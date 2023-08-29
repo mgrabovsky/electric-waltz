@@ -1,4 +1,4 @@
 mkdocs >= 1.2.3, < 1.6
-mkdocs-material >= 8.2.3, < 9.2
+mkdocs-material >= 8.2.3, < 9.3
 mkdocstrings >= 0.18.0, < 1
 mkdocstrings[python] >= 0.18, < 1
