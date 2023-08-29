@@ -42,7 +42,7 @@ jobs:
           verbose: true
 
       - name: Upload coverage report to CodeClimate
-        uses: paambaati/codeclimate-action@v4
+        uses: paambaati/codeclimate-action@v5
         if: ${{ env.PYTHON_VERSION_COVERAGE == matrix.name }}
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
