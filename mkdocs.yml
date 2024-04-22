@@ -22,7 +22,4 @@ plugins:
       handlers:
         python:
           rendering: { show_source: false }
-      watch:
-        - electric_waltz/
-        - README.md
   - search
