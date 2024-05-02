@@ -14,10 +14,11 @@ jobs:
           - { python: '3.9',  tox: py39,   name: '3.9' }
           - { python: '3.10', tox: py310,  name: '3.10' }
           - { python: '3.11', tox: py311,  name: '3.11' }
-          - { python: '3.11', tox: style,  name: 'Code style' }
-          - { python: '3.11', tox: typing, name: 'Typing' }
+          - { python: '3.12', tox: py312,  name: '3.12' }
+          - { python: '3.12', tox: style,  name: 'Code style' }
+          - { python: '3.12', tox: typing, name: 'Typing' }
     env:
-      PYTHON_VERSION_COVERAGE: '3.11'
+      PYTHON_VERSION_COVERAGE: '3.12'
     steps:
       - name: Check out sources
         uses: actions/checkout@v4
