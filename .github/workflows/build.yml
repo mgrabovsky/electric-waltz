@@ -20,7 +20,7 @@ jobs:
       PYTHON_VERSION_COVERAGE: '3.12'
     steps:
       - name: Check out sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Python
         uses: actions/setup-python@v6
