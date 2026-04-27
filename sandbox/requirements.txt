@@ -1,2 +1,2 @@
-ruamel.yaml >= 0.17.19, < 1
+ruamel.yaml >= 0.19.1, < 1
 pandas >= 2.3.3, < 3
